@@ -13,7 +13,8 @@ class PostsController extends Controller
 {
 
     public function __construct()
-    {
+    {   /*Postavi autorizaciju za sve osim za index i show, 
+        odnosno za pronalazenje i prikazivanje.*/
         $this->middleware('auth')->except(['index', 'show']);
     }
 
@@ -38,12 +39,14 @@ class PostsController extends Controller
         //$posts = Post::all();//'vata sve podatke iz modela 'Post'.
         //$posts = Post::orderBy("title", "desc")->get();
         /*Donji i gornji nacin pisanja upita je isti. 
-        Za gornji se koristi biblioteka 'DB', a za donji 'eloquent'.*/
+        Za donji se koristi biblioteka 'DB', a za gornji 'eloquent'.*/
         //$posts = DB::select("SELECT * FROM posts");
         //Ovde vrsi limit kao u mysql-u.
         //$posts = Post::orderBy("title", "desc")->take(1)->get();
         /*Ovde se vrsi stranicenje. 
         Parametar je brojka prikazanih stavki po stranici.*/
+        /*Upit: prikazi sve, poredjaj po created_at tabeli,
+        rasruce.*/
         $posts = Post::orderBy("created_at", "desc")->paginate(2);
         
         return view("posts.index")->with("posts", $posts);
@@ -97,6 +100,8 @@ class PostsController extends Controller
         /*Belezenje vrednosti polja iz forme za 
         upisivanje u bazu.*/
         $post = new Post;
+        /*Kada se pozove ova funkcija,
+        uzmi sta ima iz inputa sa imenom title.*/
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->user_id = auth()->user()->id;
@@ -180,9 +185,8 @@ class PostsController extends Controller
             //Upload Image
             //Skladisti aploadovane slike u app/storage/app/public/samaSlika.jpg
             $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
-        }/**/
+        }
         
-
         // Create Post
         /*Belezenje vrednosti polja iz forme za 
         upisivanje u bazu.*/
@@ -190,29 +194,34 @@ class PostsController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
 
-        if ($request->hasFile('cover_image')) {
-            if($post->cover_image!=="noimage.jpg"){
+        $check = $request->file('cover_image');
+
+        $stara_slika = $post->cover_image;
+
+        if($check){
+
+            if($stara_slika==="noimage.jpg"){
+                $post->cover_image = $fileNameToStore;
+            }
+            else{
                 Storage::delete('public/cover_images/' . $post->cover_image);
                 $post->cover_image = $fileNameToStore;
             }
-            
-        }
 
-        if($post->cover_image==="noimage.jpg"){
-            $post->cover_image = "noimage.jpg";
-            $post->save();
-            return redirect('/posts')->with('success', 'Post Updated');
         }
+        else{
 
-        if (!($request->hasFile('cover_image')) && $post->cover_image!=="noimage.jpg") {
-            Storage::delete('public/cover_images/' . $post->cover_image);
-            $post->cover_image = "noimage.jpg";
-            $post->save();
-            return redirect('/posts')->with('success', 'Post Updated');
+            if($stara_slika==="noimage.jpg"){
+                $post->cover_image = $stara_slika;
+            }
+            else{
+                Storage::delete('public/cover_images/' . $post->cover_image);
+                $post->cover_image = "noimage.jpg";
+            }
+
         }
 
         $post->save();
-        
         //Ovde se redirektuje po uspesnom postovanju.
         return redirect('/posts')->with('success', 'Post Updated');
     }

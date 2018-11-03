@@ -42,6 +42,8 @@ $router->group(['middleware'=>'auth'], function(){
 });
 */
 Route::resource("posts", "PostsController");
+/*Automatski postavlja autorizaciju. 
+Kada se uradi ono sa tinkerom, ovo se automatski doda.*/
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
