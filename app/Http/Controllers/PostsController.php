@@ -16,6 +16,12 @@ class PostsController extends Controller
     {   /*Postavi autorizaciju za sve osim za index i show, 
         odnosno za pronalazenje i prikazivanje.*/
         $this->middleware('auth')->except(['index', 'show']);
+        /*Ovo znaci da ce traziti autorizaciju 
+        za sve operacije, osim za indeksiranje 
+        i prikazivanje postova. Dakle svako moze da 
+        gleda postove, ali samo trenutno ulogovani 
+        korisnik moze editovati i brisati 
+        i to samo svoje postove.*/
     }
 
     /**
