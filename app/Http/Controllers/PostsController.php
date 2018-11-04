@@ -113,7 +113,7 @@ class PostsController extends Controller
         $post->user_id = auth()->user()->id;
         $post->cover_image = $fileNameToStore;
         $post->save();
-        
+        //dd(request()->all());
         //Ovde se redirektuje po uspesnom postovanju.
         return redirect('/posts')->with('success', 'Post created');
 
