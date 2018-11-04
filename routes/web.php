@@ -41,7 +41,18 @@ $router->group(['middleware'=>'auth'], function(){
     Route::resource("posts", "PostsController");
 });
 */
+
 Route::resource("posts", "PostsController");
+/*Gonje je identicno donjem.*/
+/*
+Route::get('/posts', "PostsController@index");
+Route::get('/posts/create', "PostsController@create");
+Route::get('/posts/{id}', "PostsController@show");
+Route::post('/posts', "PostsController@store");
+Route::get('/posts/{id}/edit', "PostsController@edit");
+Route::put('/posts/{id}', "PostsController@update");
+Route::delete('/posts/{id}', "PostsController@destroy");
+*/
 /*Automatski postavlja autorizaciju. 
 Kada se uradi ono sa tinkerom, ovo se automatski doda.*/
 Auth::routes();

@@ -25,6 +25,8 @@
     <!--Method 'spoofing' jer nema metoda 'update', odnosno 'PUT'.-->
     {{Form::hidden('old_image',$post->cover_image)}}
     {{Form::hidden('_method', 'PUT')}}
+    <!--Gornje je isto kao i ovo{{method_field("PUT")}}
+    i ovo <input name="_method" type="hidden" value="PUT"> -->
     {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
 
     {!! Form::close() !!}

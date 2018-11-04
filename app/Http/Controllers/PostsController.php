@@ -228,6 +228,12 @@ class PostsController extends Controller
         }
 
         $post->save();
+        //dd($post);
+         /*Izvrsice npr. edit, prikazace ovo 
+        i nece redirektovati.*/
+        //dd(request()->all());
+        /*Prikazace sadrzaj sabmitovanih polja
+         iz forme.*/
         //Ovde se redirektuje po uspesnom postovanju.
         return redirect('/posts')->with('success', 'Post Updated');
     }
