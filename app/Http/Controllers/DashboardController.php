@@ -30,6 +30,7 @@ class DashboardController extends Controller
         /*from the User model get the post 
         which has the user_id field $user_id;*/
         $user = User::find($user_id);
+		//dd($user->posts);
         return view('dashboard')->with('posts', $user->posts);
     }
 }
