@@ -1,6 +1,7 @@
 <!--Ovo je view za prikazivanje poruka, 
     error i success po sabmitovanju forme.
-    Poruke, interno se dobijaju od laravela.-->
+    Poruke, interno se dobijaju od laravela.
+    Kreirano od strane mene-->
 @if(count($errors) > 0)
     @foreach($errors->all() as $error)
         <div class="alert alert-danger">
