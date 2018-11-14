@@ -8,11 +8,13 @@ za prikazivanje stranica. Njegove metode vracaju view-ove
 za pojedine strane. */
 class PagesController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $title = "Welcome to Laravel!";
         //return view("pages.index", compact("title"));
         /*Ovde se navodi da se view-u koji se poziva, 
         prosledi i promenljiva ciji sadrzaj ide u jednom tagu.*/
+        //dd($request->ip());//prikazuje ip adresu kompa sa kog se pristupa.
+        //dd($request->header("user-agent"));//prikazuje sta se koristi za pristup aplikaciji.
         return view("pages.index")->with("title", $title);
     }
 

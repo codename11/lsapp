@@ -43,7 +43,7 @@ $router->group(['middleware'=>'auth'], function(){
 */
 
 Route::resource("posts", "PostsController");
-/*Gonje je identicno donjem.*/
+/*Gornje je identicno donjem.*/
 /*
 Route::get('/posts', "PostsController@index");
 Route::get('/posts/create', "PostsController@create");
@@ -58,3 +58,8 @@ Kada se uradi ono sa tinkerom, ovo se automatski doda.*/
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
+
+Route::get('service/post/view', 'PostController@view');
+Route::get('service/post/create', 'PostController@create');
+Route::get('service/post/update', 'PostController@update');
+Route::get('service/post/delete', 'PostController@delete');

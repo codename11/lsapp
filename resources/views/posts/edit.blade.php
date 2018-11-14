@@ -30,6 +30,7 @@
     {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
 
     {!! Form::close() !!}
+    <a href="{{ URL::previous() }}" class="btn btn-default">Back</a>
     <!--
     Original:
     https://laravelcollective.com/docs/master/html#opening-a-form

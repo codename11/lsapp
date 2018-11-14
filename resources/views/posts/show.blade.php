@@ -30,4 +30,5 @@
             <!--Jednostruke viticaste zagrade za close.-->
         @endif
     @endif
+    <br><a href="{{ URL::previous() }}" class="btn btn-default">Back</a>
 @endsection

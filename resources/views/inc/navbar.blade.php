@@ -13,37 +13,40 @@
 
                   </ul>
 
-                  <ul class="navbar-nav">
-                      <li class="nav-item">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
-                      </li>
-                      <li class="nav-item">
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
-                      </li>
-                      <li class="nav-item">
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/services">Services</a>
-                      </li>
-                      <li class="nav-item">
-                            <a class="nav-link" href="/posts">Blog</a>
-                        </li>
-                      <!--   
-                      @auth
-                      <li class="nav-item">
-                          <a class="nav-link" href="/posts">Blog</a>
-                      </li>  
-                      @endauth
-                      -->
-                    <!--
-                        Ovo gornje ili ovo dole.
-                    Proverava da li je trenutni korisnik guest ili registrovani.
-                    @if(Auth::check())
-                        <li class="nav-item">
-                          <a class="nav-link" href="/posts">Blog</a>
-                        </li>  
-                    @endif
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/posts">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/posts/create">Create Posts</a>
+                    </li>
+                    <!--   
+                    @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="/posts">Blog</a>
+                    </li>  
+                    @endauth
                     -->
+                <!--
+                    Ovo gornje ili ovo dole.
+                Proverava da li je trenutni korisnik guest ili registrovani.
+                @if(Auth::check())
+                    <li class="nav-item">
+                        <a class="nav-link" href="/posts">Blog</a>
+                    </li>  
+                @endif
+                -->
 
-                  </ul>
+                </ul>
 
                   <!-- Right Side Of Navbar -->
                   <ul class="navbar-nav ml-auto">
