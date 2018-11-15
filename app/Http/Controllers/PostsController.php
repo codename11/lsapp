@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Post;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use DB;//Biblioteka za pisanje klasicnih upita.
 /*Kada god se poziva 'Post' kont. koji inace sluzi 
@@ -24,7 +25,7 @@ class PostsController extends Controller
         gleda postove, ali samo trenutno ulogovani 
         korisnik moze editovati i brisati 
         i to samo svoje postove.*/
-           
+        
     }
 
     /**
@@ -56,7 +57,9 @@ class PostsController extends Controller
         Parametar je brojka prikazanih stavki po stranici.*/
         /*Upit: prikazi sve, poredjaj po created_at tabeli,
         rastuce.*/
-        
+        /* Testiranje da li je ovoj ruti.
+        $route = Route::current();
+        dd($route);*/
         $posts = Post::orderBy("created_at", "desc")->paginate(2);
         
         return view("posts.index")->with("posts", $posts);
@@ -164,9 +167,9 @@ class PostsController extends Controller
         /*if(auth()->user()->id===1){
             return redirect("/");
         }*/
-        if(auth()->user()->id !== $post->user_id){
+        /*if(auth()->user()->id !== $post->user_id){
             return redirect("/posts")->with("error", 'Unauthorized Page');
-        }
+        }*/
 
         return view("posts.edit")->with("post", $post);
     }
@@ -180,9 +183,13 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         // load post
-        $post = Post::find(1);
+        $post = Post::find($id);
+        /*Ovo je jos kraci deo za polise i autorizaciju.
+        $this->authorize('update', $post);*/
+        /*$user = Auth::user();
+        dd($user);*/
+
         /* //Ovaj deo za verifikaciju preko polise.
         $user = Auth::user();
         if ($user->can('update', $post)) {
