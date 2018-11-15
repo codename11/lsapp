@@ -185,8 +185,8 @@ class PostsController extends Controller
     {
         // load post
         $post = Post::find($id);
-        /*Ovo je jos kraci deo za polise i autorizaciju.
-        $this->authorize('update', $post);*/
+        //Ovo je jos kraci deo za polise i autorizaciju.
+        $this->authorize('update', $post);
         /*$user = Auth::user();
         dd($user);*/
 

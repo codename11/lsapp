@@ -19,10 +19,12 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: black;">
 
     <!--Custom strana za ono kad se brani pristup korisniku preko polisa.-->
-        <img src="https://vignette.wikia.nocookie.net/dragonology/images/2/22/Death_Dragon.jpg/revision/latest?cb=20150427140253" style="width:100%;">
-    
+    <img src="https://vignette.wikia.nocookie.net/dragonology/images/2/22/Death_Dragon.jpg/revision/latest/scale-to-width-down/1000?cb=20150427140253" class="img403" alt="not_authorized">
+    <a href="{{ URL::previous() }}" class="link403">
+        <div class="alert alert-danger">Go Back, you're not authorized to be here!</div>
+    </a>
 </body>
 </html>
