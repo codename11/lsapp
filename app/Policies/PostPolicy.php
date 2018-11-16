@@ -42,7 +42,14 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->id === $post->user_id && $user->id===1;
+        return $user->id == $post->user_id;
+        
+    }
+
+    public function edit(User $user, Post $post)
+    {
+        return $user->id == $post->user_id;
+        //return $user->role!="user";
         
     }
 
@@ -53,9 +60,20 @@ class PostPolicy
      * @param  \App\Post  $post
      * @return mixed
      */
+
+    public function store(User $user, Post $post)
+    {
+        return $user->id == $post->user_id;
+    }
+
+    public function destroy(User $user, Post $post)
+    {
+        return $user->id == $post->user_id;
+    }
+
     public function delete(User $user, Post $post)
     {
-        //
+        return $user->id == $post->user_id;
     }
 
     /**

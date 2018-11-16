@@ -14,11 +14,11 @@ za pojedinacni post, dobija se i parametri koji su
 mu prosledjeni. */
 class PostsController extends Controller
 {
-
     public function __construct()
     {   /*Postavi autorizaciju za sve osim za index i show, 
         odnosno za pronalazenje i prikazivanje.*/
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except(['index', 'show', "edit"]);
+        
         /*Ovo znaci da ce traziti autorizaciju 
         za sve operacije, osim za indeksiranje 
         i prikazivanje postova. Dakle svako moze da 
@@ -154,10 +154,13 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id/*, User $user, Request $request*/)
     {
+        
         $post = Post::find($id);
-
+        
+        $this->authorize('edit', $post);
+        //dd($user);
         // Check for correct user
         /*Proverava da li je trenutni korisnik onaj 
         ciji su postovi, ako jeste, prikazace mu edit dugme, 
@@ -182,9 +185,10 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   //dd($user);
         // load post
         $post = Post::find($id);
+        $this->authorize('update', $post);
         //Ovo je jos kraci deo za polise i autorizaciju.
         //$this->authorize('update', $post);
         /*$user = Auth::user();
@@ -275,6 +279,7 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+        $this->authorize('destroy', $post);
         // Check for correct user
         /*Proverava da li je trenutni korisnik onaj 
         ciji su postovi, ako jeste, prikazace mu delete dugme, 
