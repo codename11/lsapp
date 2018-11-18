@@ -187,6 +187,13 @@ class PostsController extends Controller
     public function update(Request $request, $id)
     {   //dd($user);
         // load post
+        //dd(url()->previous());vraca prethodno pristupljeni url.
+        /*Prvi link od akcije kontrolera.
+        $url = action('PostsController@update', ["id" => $id]);
+        dd($url);*/
+        /*Stavljanje promenljive sa vrednoscu u sesiju.
+        $request->session()->put('name', 'veljko');
+        dd($request->session()->all());*/
         $post = Post::find($id);
         $this->authorize('update', $post);
         //Ovo je jos kraci deo za polise i autorizaciju.
