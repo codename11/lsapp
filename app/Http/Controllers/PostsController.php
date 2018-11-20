@@ -61,7 +61,8 @@ class PostsController extends Controller
         $route = Route::current();
         dd($route);*/
         $posts = Post::orderBy("created_at", "desc")->paginate(2);
-        
+        /*Ovo donje je paginacija samo sa prev i next.*/
+        //$posts = Post::orderBy("created_at", "desc")->simplePaginate(2);
         return view("posts.index")->with("posts", $posts);
     }
 
@@ -138,6 +139,8 @@ class PostsController extends Controller
         /*Metoda find() za model Post nalazi sve vezano za post 
         ciji je parametar(id) se nalazi u promenljivoj $id.
         Dakle 'prikazi mi post sa ajdijem iz $id'.*/
+        $postx = Post::pluck('id');//Niz sa svim id-jevima.
+        //dd($postx);
         $post = Post::find($id);/*Poziva 'Post' model
         kao parametar prosledjuje mu $id. 
         Time mu govori da u modelu 'Post' nadje ajdi-jeve(sve).*/
@@ -145,7 +148,7 @@ class PostsController extends Controller
         /*Poziva model koji se nalazi u posts>show 
         i prosledjuje mu par. $post koji sadrzi odredjeni red.*/
         
-        return view("posts.show")->with("post", $post);
+        return view("posts.show")->with(compact("post", "postx"));
     }
 
     /**

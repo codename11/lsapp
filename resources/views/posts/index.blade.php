@@ -25,4 +25,16 @@
     @else
         <p>No posts found</p>
     @endif
+    1.count: {{$posts->count()}}<br>
+    2.currentPage: {{$posts->currentPage()}}<br>
+    3.firstItem: {{$posts->firstItem()}}<br>
+    4.hasMorePages: {{$posts->hasMorePages()}}<br>
+    5.lastItem: {{$posts->lastItem()}}<br>
+    6.lastPage: {{$posts->lastPage()}}<br>
+    7.nextPageUrl: {{$posts->nextPageUrl()}}<br>
+    8.onFirstPage: {{$posts->onFirstPage()}}<br>
+    9.perPage: {{$posts->perPage()}}<br>
+    10.previousPageUrl: {{$posts->previousPageUrl()}}<br>
+    11.total: {{$posts->total()}}<br>
+    
 @endsection
