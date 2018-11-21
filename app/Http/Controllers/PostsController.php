@@ -150,7 +150,6 @@ class PostsController extends Controller
         $prev = $post1->prev($post);
         $next = $post1->next($post);
         
-        
         return view("posts.show")->with(compact("post", "prev", "next"));
     }
 

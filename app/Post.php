@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Post;
+
 class Post extends Model
 {   /*U ovoj klasi se belezi ime tabele, polja za ajdi 
     i to da li ce biti tajmstempa.*/
