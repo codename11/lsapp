@@ -18,41 +18,27 @@ class Post extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function getIds()
+    public function prev($post)
     {
-        $postx = Post::pluck('id');//Niz sa svim id-jevima.
-        foreach ($postx as $value){
-            $postsIds[] = $value;
-        } 
-
-        return $postsIds;
-    }
-
-    public function prevNext($par1, $par2)
-    {
-        $cur_index = array_search($par1, $par2);
-        $len = count($par2);
-        
-        $prev = 0;
-        $next = 0;
-
-        if(($cur_index+1)<$len){
-            $prev = $par2[$cur_index+1];
+        if($post->orderBy('id', 'ASC')->where('id', '>', $post->id)->first()){
+            $prev = $post->orderBy('id', 'ASC')->where('id', '>', $post->id)->first()->id;
         }
         else{
-            $prev = $par2[0];
+            $prev = $post->min('id');
         }
         
-        if(($cur_index-1)<$len && ($cur_index)>0){
-            $next = $par2[$cur_index-1];
+        return $prev;
+    } 
+
+    public function next($post)
+    {
+        if($post->orderBy('id', 'DESC')->where('id', '<', $post->id)->first()){
+            $next = $post->orderBy('id', 'DESC')->where('id', '<', $post->id)->first()->id;
         }
         else{
-            $next = $par2[$len-1];
+            $next = $post->max('id');
         }
-
-        $prevNext [0] = $prev;
-        $prevNext [1] = $next;
         
-        return $prevNext;
+        return $next;
     } 
 }

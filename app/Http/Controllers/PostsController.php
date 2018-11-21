@@ -139,8 +139,6 @@ class PostsController extends Controller
         /*Metoda find() za model Post nalazi sve vezano za post 
         ciji je parametar(id) se nalazi u promenljivoj $id.
         Dakle 'prikazi mi post sa ajdijem iz $id'.*/
-        $postx = Post::pluck('id');//Niz sa svim id-jevima.
-        //dd($postx);
         
         $post = Post::find($id);/*Poziva 'Post' model
         kao parametar prosledjuje mu $id. 
@@ -149,12 +147,9 @@ class PostsController extends Controller
         /*Poziva model koji se nalazi u posts>show 
         i prosledjuje mu par. $post koji sadrzi odredjeni red.*/
         $post1 = new Post();
-        $par2 = $post1->getIds();
+        $prev = $post1->prev($post);
+        $next = $post1->next($post);
         
-        $prevNext = $post1->prevNext($post->id, $par2);
-        
-        $prev = $prevNext[0];
-        $next = $prevNext[1];
         
         return view("posts.show")->with(compact("post", "prev", "next"));
     }
