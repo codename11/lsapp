@@ -2,31 +2,6 @@
 
 @section("content")
 
-        @foreach ($postx as $value) 
-            {{$postsIds[] = $value}};
-        @endforeach
-        
-        {{$cur_index = array_search($post->id, $postsIds)}};
-        {{$len = count($postsIds)}};
-        
-        {{$prev = 0}};
-        {{$next = 0}};
-
-        @if($cur_index+1!=$len){
-            {{$prev = $postsIds[$cur_index+1]}};
-        @else{
-            {{$prev = $postsIds[0]}};
-
-        @endif
-
-        
-        @if($cur_index-1>=0){
-            {{$next = $postsIds[$cur_index-1]}};
-        
-        @else{
-            {{$next = $postsIds[$len-1]}};
-        @endif
-   
     <a href="/posts" class="btn btn-light">Go Back</a>
     <div style="float: right;text-align:center;">
     <label>Projects</label><br>
@@ -63,7 +38,4 @@
     @endif
     <br><a href="{{ URL::previous() }}" class="btn btn-default">Back</a>
  
-    <br>Jedan post: {{$post}}
-    <hr>
-    Id-jevi svih postova: {{$postx}}
 @endsection
