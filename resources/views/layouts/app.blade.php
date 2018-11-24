@@ -28,14 +28,17 @@
             @yield('content')
         </main>
     </div>
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    
+    <script src="/vendor/ckeditor/ckeditor.js"></script>
+    <!--Stari ckeditor<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+        Sa novim CKEditorom, ni ovo donje nije potrebno.
     <script>
-        let textArea = document.getElementById("article-ckeditor");
+        let textArea = document.getElementById("ckeditor");
         window.onload = () => {
             if(textArea){
-                CKEDITOR.replace( 'article-ckeditor' );
+                CKEDITOR.replace( 'ckeditor' );
             }
         }
-    </script>
+    </script>-->
 </body>
 </html>
