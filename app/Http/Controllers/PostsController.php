@@ -122,7 +122,8 @@ class PostsController extends Controller
         $post->cover_image = $fileNameToStore;
         $post->save();
         //dd(request()->all());
-        //Ovde se redirektuje po uspesnom postovanju.
+        /*Ovde se redirektuje po uspesnom postovanju. 
+        Ovo success, te poruka, se odnosi na ono u messagess fajlu.*/
         return redirect('/posts')->with('success', 'Post created');
 
     }

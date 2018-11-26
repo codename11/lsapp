@@ -26,9 +26,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/posts">Blog</a>
                     </li>
+                    @auth
                     <li class="nav-item">
                         <a class="nav-link" href="/posts/create">Create Posts</a>
                     </li>
+                    @endauth
                     <!--   
                     @auth
                     <li class="nav-item">
