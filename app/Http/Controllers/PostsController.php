@@ -60,6 +60,9 @@ class PostsController extends Controller
         /* Testiranje da li je ovoj ruti.
         $route = Route::current();
         dd($route);*/
+        /*$id = Auth::id();
+        $user = Auth::user();
+        dd($user->id);*/
         $posts = Post::orderBy("created_at", "desc")->paginate(2);
         /*Ovo donje je paginacija samo sa prev i next.*/
         //$posts = Post::orderBy("created_at", "desc")->simplePaginate(2);
@@ -92,8 +95,9 @@ class PostsController extends Controller
                 'cover_image' => 'image|nullable|max:1999'
             ]
         );
-
+        /*nullable znaci da je opciono.*/
         //Handle file upload
+        /*Ako je 'truthy' polje onda znaci da je neki fajl aploudovan.*/
         if($request->hasFile('cover_image')){
             // Get filename with extension
             $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
