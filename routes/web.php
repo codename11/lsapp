@@ -63,3 +63,6 @@ Route::get('service/post/view', 'PostController@view');
 Route::get('service/post/create', 'PostController@create');
 Route::get('service/post/update', 'PostController@update');
 Route::get('service/post/delete', 'PostController@delete');
+
+//Test route for google map
+Route::get('/test', "GmapsController@test");

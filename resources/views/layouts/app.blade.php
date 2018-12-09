@@ -11,7 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -40,5 +40,34 @@
             }
         }
     </script>-->
+<script>
+        
+    function myMap() { 
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position){
+                let lat = position.coords.latitude;
+                let lng = position.coords.longitude;
+            
+                let mapProp = {
+                    center:new google.maps.LatLng(lat,lng),
+                    zoom:5,
+                };
+        
+                let marker = new google.maps.Marker({
+                    position: mapProp.center,
+                    icon:'https://cdn3.iconfinder.com/data/icons/discovery/32x32/actions/gtk-media-record.png',
+                    animation:google.maps.Animation.BOUNCE
+                });
+        
+                let map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+            
+                marker.setMap(map);
+            });
+        } 
+        
+    }
+        
+</script>
+<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDllwuDAU1-GxoYtmVwp0rjxhPwYSfeI0Y&callback=myMap"></script>
 </body>
 </html>

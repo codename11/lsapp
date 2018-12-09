@@ -27,7 +27,7 @@ class PostsController extends Controller
         i to samo svoje postove.*/
         
     }
-
+    
     /**
      * Display a listing of the resource.
      *

@@ -26,6 +26,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/posts">Blog</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/test">test</a>
+                    </li>
                     @auth
                     <li class="nav-item">
                         <a class="nav-link" href="/posts/create">Create Posts</a>
