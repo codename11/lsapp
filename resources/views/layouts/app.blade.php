@@ -68,6 +68,6 @@
     }
         
 </script>
-<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDllwuDAU1-GxoYtmVwp0rjxhPwYSfeI0Y&callback=myMap"></script>
+<script defer src="https://maps.googleapis.com/maps/api/js?key=Api_Key&callback=myMap"></script>
 </body>
 </html>
