@@ -40,34 +40,57 @@
             }
         }
     </script>-->
-<script>
-        
-    function myMap() { 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position){
-                let lat = position.coords.latitude;
-                let lng = position.coords.longitude;
+
+<!--Test za da li je trenutna ruta ona za google mapu gde se pojavljuje.
+Ako jeste, onda se 'kod' za gmape realizuje. Ukoliko nije ruta za mape definisana u kontroleru,
+nece se realizovati.-->
+<?php 
+    $route = Route::getFacadeRoot()->current()->uri();
+    if(isset($route) && $route=="test"){
+?>
+
+    <script>
             
-                let mapProp = {
-                    center:new google.maps.LatLng(lat,lng),
-                    zoom:5,
-                };
-        
-                let marker = new google.maps.Marker({
-                    position: mapProp.center,
-                    icon:'https://cdn3.iconfinder.com/data/icons/discovery/32x32/actions/gtk-media-record.png',
-                    animation:google.maps.Animation.BOUNCE
+        function myMap() { 
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position){
+                    let lat = position.coords.latitude;
+                    let lng = position.coords.longitude;
+                
+                    let mapProp = {
+                        center:new google.maps.LatLng(lat,lng),
+                        zoom:5,
+                    };
+            
+                    let marker = new google.maps.Marker({
+                        position: mapProp.center,
+                        icon:'https://cdn3.iconfinder.com/data/icons/discovery/32x32/actions/gtk-media-record.png',
+                        animation:google.maps.Animation.BOUNCE
+                    });
+            
+                    let map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+                
+                    marker.setMap(map);
                 });
-        
-                let map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+            } 
             
-                marker.setMap(map);
-            });
-        } 
+        }
+            
+    </script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=myMap"></script>
+
+    <script>  
+        let route = {!!json_encode($route)!!};
+        var name = {!! json_encode($name) !!};
+        if(name && route){
+            alert(route);
+            alert(name);
+        }
         
+    </script>
+
+<?php
     }
-        
-</script>
-<script defer src="https://maps.googleapis.com/maps/api/js?key=Api_Key&callback=myMap"></script>
+?>
 </body>
 </html>
