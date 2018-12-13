@@ -13906,32 +13906,8 @@ window.Vue = __webpack_require__(36);
 Vue.component('example-component', __webpack_require__(39));
 
 var app = new Vue({
-    el: '#app'
+  el: '#app'
 });
-
-function myMap() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var lat = position.coords.latitude;
-            var lng = position.coords.longitude;
-
-            var mapProp = {
-                center: new google.maps.LatLng(lat, lng),
-                zoom: 5
-            };
-
-            var marker = new google.maps.Marker({
-                position: mapProp.center,
-                icon: 'https://cdn3.iconfinder.com/data/icons/discovery/32x32/actions/gtk-media-record.png',
-                animation: google.maps.Animation.BOUNCE
-            });
-
-            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
-            marker.setMap(map);
-        });
-    }
-}
 
 /***/ }),
 /* 13 */

@@ -18,6 +18,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<style>
+
+img[src="https://cdn3.iconfinder.com/data/icons/discovery/32x32/actions/gtk-media-record.png"]{
+    border-radius:16px;
+    border:3px solid blue !important;
+    
+}
+
+</style>
 </head>
 <body>
     <div id="app">
@@ -50,41 +59,102 @@ nece se realizovati.-->
 ?>
 
     <script>
-            
-        function myMap() { 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position){
-                    let lat = position.coords.latitude;
-                    let lng = position.coords.longitude;
+        //Kobajagi podaci dobijeni od servera.
+        let data = {
+            "stores":[
+                {
+                    "id":"1",
+                    "naziv":"Tehnokom",
+                    "adresa":"Knez Mihajlova 82",
+                    "lat":"-33.890542",
+                    "lng":"151.274856",
+                    "id_komercijaliste":"Miloš Lovrić",
+                    "description": "store"
+                },
+                {
+                    "id":"2",
+                    "naziv":"Termo Fluid",
+                    "adresa":"Knez Mihajlova 86",
+                    "lat":"-33.923036",
+                    "lng":"151.259052",
+                    "id_komercijaliste":"Dejan Ilić",
+                    "description": "store"
+                },
+                {
+                    "id":"3",
+                    "naziv":"Vodoterm",
+                    "adresa":"Irene Zeković 31",
+                    "lat":"-34.028249",
+                    "lng":"151.157507",
+                    "id_komercijaliste":"Dejan Ilić",
+                    "description": "store"
+                },
                 
-                    let mapProp = {
-                        center:new google.maps.LatLng(lat,lng),
-                        zoom:5,
-                    };
-            
-                    let marker = new google.maps.Marker({
-                        position: mapProp.center,
-                        icon:'https://cdn3.iconfinder.com/data/icons/discovery/32x32/actions/gtk-media-record.png',
-                        animation:google.maps.Animation.BOUNCE
-                    });
-            
-                    let map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-                
-                    marker.setMap(map);
-                });
-            } 
-            
-        }
-            
+            ],
+            "salons": [
+                {
+                    "id":"4",
+                    "naziv":"Home Decor System",
+                    "adresa":"Kolarska 117",
+                    "lat":"-33.80010128657071",
+                    "lng":"151.28747820854187",
+                    "id_komercijaliste":"Dejan Ilić",
+                    "description": "salon"
+                },
+                {
+                    "id":"5",
+                    "naziv":"Dobrić",
+                    "adresa":"Obilazni put bb",
+                    "lat":"-33.950198",
+                    "lng":"151.259302",
+                    "id_komercijaliste":"Dejan Ilić",
+                    "description": "salon"
+                }
+            ]
+        };
+
+        let icons = {
+            buyer: { 
+                        url: "https://www.gravatar.com/avatar/bae5ca56926344693f12254ce9cfb702?s=32&d=identicon&r=PG", 
+                        letter: ""
+                    },
+            manager: { 
+                        url: "https://www.gravatar.com/avatar/3aa31a90e5710a559643ed0045e32184?s=32&d=identicon&r=PG", 
+                        letter: ""
+                    },
+            salon: { 
+                url: "https://dl1.cbsistatic.com/i/r/2017/02/01/0231dff5-60fe-4427-869e-306bb526f792/thumbnail/32x32/6962ed0b3a6bddef4029bdaa7329c36d/fmimg305106705692540651.png", 
+                letter: ""
+            },
+            store: { 
+                url: "https://cdn1.iconfinder.com/data/icons/Momentum_GlossyEntireSet/32/store.png", 
+                letter: ""
+            },
+            projectFirstPhase: { 
+                url: "https://dl1.cbsistatic.com/i/r/2017/11/13/6579c82f-5125-4eb5-a380-c485724fa2d6/thumbnail/32x32/6d2e80a1995b2a083ab11c522cbc5aab/iconimg29084.png", 
+                letter: ""
+            },
+            projectSecondPhase: { 
+                url: "https://addons.thunderbird.net/user-media/addon_icons/141/141863-64.png?modified=1329495840", 
+                letter: ""
+            },  
+            projectThirdPhase: { 
+                url: "http://icocentre.com/Icons/bf-gantt.png?size=32", 
+                letter: ""
+            },     
+        };
+
     </script>
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=myMap"></script>
+    <script src="{{ asset('js/skripta.js') }}" defer></script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDllwuDAU1-GxoYtmVwp0rjxhPwYSfeI0Y&callback=myMap"></script>
 
     <script>  
         let route = {!!json_encode($route)!!};
         var name = {!! json_encode($name) !!};
+        //Donje, u if-u, je nepotrebno, samo radi demonstracije.
         if(name && route){
-            alert(route);
-            alert(name);
+            //alert("Route name: "+route);
+            //alert("User name: "+name);
         }
         
     </script>
