@@ -152,7 +152,8 @@ nece se realizovati.-->
     <script defer src="{{ asset('js/skripta.js') }}"></script>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDllwuDAU1-GxoYtmVwp0rjxhPwYSfeI0Y&callback=myMap"></script>
 
-    <script>  
+    <script>  /*Ovo je potrebno da se iz php prebaci u js. 
+    Ako je kao niz gore, onda mora i da se ieterira.*/
         let route = {!!json_encode($route)!!};
         var name = {!! json_encode($name) !!};
         //Donje, u if-u, je nepotrebno, samo radi demonstracije.
