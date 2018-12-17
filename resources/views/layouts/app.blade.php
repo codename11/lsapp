@@ -141,11 +141,15 @@ nece se realizovati.-->
             projectThirdPhase: { 
                 url: "http://icocentre.com/Icons/bf-gantt.png?size=32", 
                 letter: ""
-            },     
+            }, 
+            default: { 
+                url: "https://www.hedgewars.org/images/smileys/shock.png", 
+                letter: ""
+            },    
         };
 
     </script>
-    <script src="{{ asset('js/skripta.js') }}" defer></script>
+    <script defer src="{{ asset('js/skripta.js') }}"></script>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDllwuDAU1-GxoYtmVwp0rjxhPwYSfeI0Y&callback=myMap"></script>
 
     <script>  

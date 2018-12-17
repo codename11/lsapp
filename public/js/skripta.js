@@ -63,8 +63,8 @@ function setMarkers(map,markerData, arr){
                 case "projectThirdPhase":
                     icoUrl = icons.projectThirdPhase.url;
                     break;
-
                 default:
+                    icoUrl = icons.default.url;
                     break;
             }
 
