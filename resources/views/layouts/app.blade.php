@@ -115,12 +115,12 @@ nece se realizovati.-->
 
         let icons = {
             buyer: { 
-                        url: "https://www.gravatar.com/avatar/bae5ca56926344693f12254ce9cfb702?s=32&d=identicon&r=PG", 
-                        letter: ""
+                url: "https://www.gravatar.com/avatar/bae5ca56926344693f12254ce9cfb702?s=32&d=identicon&r=PG", 
+                letter: ""
                     },
             manager: { 
-                        url: "https://www.gravatar.com/avatar/3aa31a90e5710a559643ed0045e32184?s=32&d=identicon&r=PG", 
-                        letter: ""
+                url: "https://www.gravatar.com/avatar/3aa31a90e5710a559643ed0045e32184?s=32&d=identicon&r=PG", 
+                letter: ""
                     },
             salon: { 
                 url: "https://dl1.cbsistatic.com/i/r/2017/02/01/0231dff5-60fe-4427-869e-306bb526f792/thumbnail/32x32/6962ed0b3a6bddef4029bdaa7329c36d/fmimg305106705692540651.png", 
