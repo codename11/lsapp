@@ -30,19 +30,25 @@ function myMap(val) {
         
 function setMarkers(map,markerData, arr){
     
-    let map1;
+    let unFlattened;
+    let flattened;
     if(arr){
-        map1 = arr.map((item, index) => markerData[item]).flat();
+
+        unFlattened = arr.map((item, index) => markerData[item]);
+        flattened = unFlattened.reduce(function(a, b) {
+            return a.concat(b);
+        });
+        console.log(arr);
     }
     
     let icoUrl;
-    if(map1){
+    if(flattened){
         
         var infowindow = new google.maps.InfoWindow();
-        for(let i=0;i<map1.length;i++){
+        for(let i=0;i<flattened.length;i++){
 
-            switch (map1[i].description) {
-                case "buyer":
+            switch (flattened[i].description) {
+                case "buyer":/*Ovo je description atribut niza objekata iz baze.*/
                     icoUrl = icons.buyer.url;
                     break;
                 case "manager":
@@ -69,17 +75,21 @@ function setMarkers(map,markerData, arr){
             }
 
             marker = new google.maps.Marker({
-                position: {lat: parseFloat(map1[i].lat), lng: parseFloat(map1[i].lng)},
+                position: {lat: parseFloat(flattened[i].lat), lng: parseFloat(flattened[i].lng)},
                 map: map,
                 icon: icoUrl,
-                title: ""+map1[i].naziv,
+                title: ""+flattened[i].naziv,
                 zIndex: i,
                 animation: google.maps.Animation.DROP,
             });
-            
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
-                    infowindow.setContent("<div><h1>"+map1[i].naziv+"</h1><p>Adresa: "+map1[i].adresa+"</p><p>Koordinate: <br>Latitude: "+map1[i].lat+"<br>Longitude: "+map1[i].lng+"</p></div>");
+
+            let addresa = flattened[i].adresa ? "<p>Adresa: "+flattened[i].adresa+"</p>" : "<br>"; //Vrsi proveru da li postoji adresa, ako postoji, prikayuje je, ukoliko ne postoji, onda samo brejk lajn.
+            let naziv = flattened[i].naziv ? "<h1>"+flattened[i].naziv+"</h1>" : "<br>";
+            let ltdLng = flattened[i].lat && flattened[i].lng ? "<p>Koordinate: <br>Latitude: "+flattened[i].lat+"<br>Longitude: "+flattened[i].lng+"</p>" : "<br>";
+
+            google.maps.event.addListener(marker, 'click', ((marker, i) => {
+                return () => {
+                    infowindow.setContent("<div>"+naziv+addresa+ltdLng+"</div>");
                     infowindow.open(map, marker);
                 }
             })(marker, i));

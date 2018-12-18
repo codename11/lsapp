@@ -55,12 +55,16 @@ Ako jeste, onda se 'kod' za gmape realizuje. Ukoliko nije ruta za mape definisan
 nece se realizovati.-->
 <?php 
     $route = Route::getFacadeRoot()->current()->uri();
+    
     if(isset($route) && $route=="test"){
 ?>
 
     <script>
+        let data = JSON.parse({!!json_encode($data)!!});
+        
+        console.log(data);
         //Kobajagi podaci dobijeni od servera.
-        let data = {
+        /*let data = {
             "stores":[
                 {
                     "id":"1",
@@ -111,8 +115,10 @@ nece se realizovati.-->
                     "description": "salon"
                 }
             ]
-        };
+        };*/
 
+        //let data = JSON.parse({$data});
+        //console.log(data);
         let icons = {
             buyer: { 
                 url: "https://www.gravatar.com/avatar/bae5ca56926344693f12254ce9cfb702?s=32&d=identicon&r=PG", 
@@ -139,7 +145,7 @@ nece se realizovati.-->
                 letter: ""
             },  
             projectThirdPhase: { 
-                url: "http://icocentre.com/Icons/bf-gantt.png?size=32", 
+                url: "https://static.coinpaprika.com/storage/cdn/currency_images/6560453.png", 
                 letter: ""
             }, 
             default: { 
@@ -147,20 +153,14 @@ nece se realizovati.-->
                 letter: ""
             },    
         };
-
+        
     </script>
     <script defer src="{{ asset('js/skripta.js') }}"></script>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDllwuDAU1-GxoYtmVwp0rjxhPwYSfeI0Y&callback=myMap"></script>
 
     <script>  /*Ovo je potrebno da se iz php prebaci u js. 
     Ako je kao niz gore, onda mora i da se ieterira.*/
-        let route = {!!json_encode($route)!!};
-        var name = {!! json_encode($name) !!};
-        //Donje, u if-u, je nepotrebno, samo radi demonstracije.
-        if(name && route){
-            //alert("Route name: "+route);
-            //alert("User name: "+name);
-        }
+      
         
     </script>
 
