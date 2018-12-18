@@ -32,7 +32,7 @@ function setMarkers(map,markerData, arr){
     
     let unFlattened;
     let flattened;
-    if(arr){
+    if(arr && arr.length>0){
 
         unFlattened = arr.map((item, index) => markerData[item]);
         flattened = unFlattened.reduce(function(a, b) {
@@ -42,7 +42,7 @@ function setMarkers(map,markerData, arr){
     }
     
     let icoUrl;
-    if(flattened){
+    if(flattened && flattened.length>0){
         
         var infowindow = new google.maps.InfoWindow();
         for(let i=0;i<flattened.length;i++){
