@@ -15,8 +15,16 @@ class FpdfController extends Controller
 
     public function pdf($id)
     {
+
+        $pdf = new Fpdf();
+        
+        $pdf::SetMargins(10,30,10);
+        $pdf::AddPage();
+        
+        //Pocetak prve varijante.
+        //Pravi pdf od podataka iz baze.
+
         $post = Post::find($id);
-        //dd($post);
         $postTitle = $post->title;
         $postBody = $post->body;
         $postCover = $post->cover_image;
@@ -24,15 +32,11 @@ class FpdfController extends Controller
         $name = Auth::user()->name;
         $email = Auth::user()->email;
 
-        $pdf = new Fpdf();
-        
-        $pdf::SetMargins(10,30,10);
-        $pdf::AddPage();
-        
-        //Pravi pdf od podataka iz baze
-        $pdf::SetFont('Arial','',8);
-        $pdf::SetFillColor(255, 255, 153);
-        $pdf::Cell(60,10,"Ime",1,0,'C',true);
+        //Prvi par. je font, drugi bold/italic, ako je prazno onda je obican. Treci je velicina fonta.
+        $pdf::SetFont('Arial','',8);//Setuje font za sad pa nadalje.
+        $pdf::SetFillColor(255, 255, 153);//Setuje boju za jedan red.
+        //Prvi par. je sirina celije, drugi visina, treci sadrzaj, cetvrti je da li ima bordere, peti je brejk lajn, sesti je je kako je centriran tekst unutar celije,
+        $pdf::Cell(60,10,"Ime",1,0,'C',true);//Ako je true, onda se u ovom redu setue boja za taj red.
         $pdf::Cell(60,10,"Email",1,0,'C',true);
         $pdf::Cell(0,10,"Ruta",1,1,'C',true);
 
@@ -45,15 +49,16 @@ class FpdfController extends Controller
         $pdf::Cell(60,10,"Body",1,0,'C',true);
         $pdf::Cell(0,10,"Cover_image",1,1,'C',true);
 
-        $pdf::Cell(60,10,$postTitle,1,0,'C');
-        $parsedHtml = HtmlDomParser::str_get_html($postBody)->plaintext;
-        $document = str_replace("&nbsp;"," ",$parsedHtml);
-        $document1 = str_replace(". ",".\n",$document);
-        $pdf::MultiCell(60, 5, $document1,1,'C');
-        $pdf::Image("storage/cover_images/".$postCover,130,60,70);
-        
+        $pdf::Cell(60,10,$postTitle,1,0,'C');//Kao par. za tekst uzima vrednost iz baze, joja je naslov posta. Gore definisano.
+        $parsedHtml = HtmlDomParser::str_get_html($postBody)->plaintext;//Parsira html, jer se u bodiju koristi ckeditor.
+        $document = str_replace("&nbsp;"," ",$parsedHtml);//Parsiranje se ne vrsi dobro, pa je ova linie, a i donja neophodna, stoga rucno parsiranje.
+        $document1 = str_replace(". ",".\n",$document);//^Takodje.
+        $pdf::MultiCell(60, 5, $document1,1,'C');//Ovo je kada ima previse teksta, pa se 'wrappuje'.
+        $pdf::Image("storage/cover_images/".$postCover,130,60,70);//Postavljanje slike. Prvi par je putanja+ime+eks. slike. Drug i treci su x/y koordinate. Cetvrti je procentualno sirina slike.
+        //Kraj prve varijante.
 
-        /*//Pravi pdf od hardkodovanih podataka. Lici kao na ovu fakturu: https://invoicesimple1.wpengine.com/wp-content/uploads/2018/06/Sample-Invoice-printable.png 
+        /*//Pocetak duge varijante.
+        //Pravi pdf od hardkodovanih podataka. Lici na ovu fakturu: https://invoicesimple1.wpengine.com/wp-content/uploads/2018/06/Sample-Invoice-printable.png 
         $pdf::SetFont('Arial','B',16);
         $pdf::Cell(0,10,"Stanford Plumbing & Heating",0,1,'L');
 
@@ -62,10 +67,10 @@ class FpdfController extends Controller
         $pdf::Cell(0,10,"990-120-4560",0,1,'L');
         
         $pdf::Image("Plumbing-icon.png",130,10,70);
-        $link = "<a href='http://www.example.com'>www.example.com</a>";
-        $pdf::WriteHTML($link);
+        $link = "<a href='http://www.example.com'>www.example.com</a>";//Pravljenje linka.
+        $pdf::WriteHTML($link);//Naknadno ubacena funkcija posle instalacije sa composer-om ovog plugin-a. Nalazi se u C:\xampp\htdocs\lsapp\vendor\codedge\laravel-fpdf\src\Fpdf\Fpdf.php . Sluzi za setovanje/parsiranje html.
         
-        $pdf::Ln(20);
+        $pdf::Ln(20);//Kastom odredjivanje brejk lajna. Par. je mera.
         $pdf::SetFont('Arial','B',8);
         $pdf::Cell(130,6,"BILL TO",0,0,'L');
         $pdf::Cell(30,6,"Invoice No: ",0,0,'R');
@@ -90,10 +95,10 @@ class FpdfController extends Controller
         $pdf::Ln(10);
         
         $pdf::SetFont('Arial','B',8);
-        $pdf::Cell(100,4,"DESCRIPTION","LT",0,'C');
-        $pdf::Cell(30,4,"QTY/HR","T",0,'C');
-        $pdf::Cell(30,4,"UNIT PRICE","T",0,'C');
-        $pdf::Cell(30,4,"TOTAL","TR",1,'C');
+        $pdf::Cell(100,4,"DESCRIPTION","LT",0,'C');//Cetvrti par. granica left i top.
+        $pdf::Cell(30,4,"QTY/HR","T",0,'C');//Cetvrti par. granica top.
+        $pdf::Cell(30,4,"UNIT PRICE","T",0,'C');//Cetvrti par. granica top.
+        $pdf::Cell(30,4,"TOTAL","TR",1,'C');//Cetvrti par. granica top i right.
 
         $pdf::SetFont('Arial','',8);
         $pdf::Cell(100,4,"Installed new kitchen sink(hours)","LT",0,'C');
@@ -151,8 +156,7 @@ class FpdfController extends Controller
         $pdf::Cell(100,4,"","LTB",0,'C');
         $pdf::Cell(30,4,"","LTB",0,'C');
         $pdf::Cell(30,4,"","LTB",0,'C');
-        $pdf::Cell(30,4,"","LTRB",1,'C');
-
+        $pdf::Cell(30,4,"","LTRB",1,'C');//Cetvrti par. granica left, top, right i bottom.
 
         $pdf::SetFont('Arial','',8);
         $pdf::Cell(100,60,"Thank you for your business!",0,0,'C');
@@ -189,6 +193,7 @@ class FpdfController extends Controller
         $pdf::SetFont('Arial','',8);
         $pdf::Cell(120,0,"Please pay within 2 days by PayPal (bob@stanfordplumbing.com)",0,1,'L');
         $pdf::Cell(120,8,"Installed products have 5 year warranty.",0,0,'L');
+        //Kraj druge varijante.
         */
         $pdf::Output();
         exit;
