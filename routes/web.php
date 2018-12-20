@@ -66,3 +66,5 @@ Route::get('service/post/delete', 'PostController@delete');
 
 //Test route for google map
 Route::get('/test', "GmapsController@test");
+
+Route::get('/pdfview/{post}', "FpdfController@pdf");

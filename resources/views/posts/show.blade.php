@@ -37,5 +37,5 @@
         @endif
     @endif
     <br><a href="{{ URL::previous() }}" class="btn btn-default">Back</a>
- 
+    <a href="/pdfview/{{$post->id}}" class="btn btn-success">toPDF</a>
 @endsection
