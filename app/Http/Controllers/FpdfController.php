@@ -29,8 +29,9 @@ class FpdfController extends Controller
         $postBody = $post->body;
         $postCover = $post->cover_image;
         $route = Route::getFacadeRoot()->current()->uri();
-        $name = Auth::user()->name;
-        $email = Auth::user()->email;
+        $user = User::find($post->user_id);
+        $name = $user->name;
+        $email = $user->email;
 
         //Prvi par. je font, drugi bold/italic, ako je prazno onda je obican. Treci je velicina fonta.
         $pdf::SetFont('Arial','',8);//Setuje font za sad pa nadalje.
