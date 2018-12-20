@@ -196,7 +196,7 @@ class FpdfController extends Controller
         $pdf::Cell(120,8,"Installed products have 5 year warranty.",0,0,'L');
         //Kraj druge varijante.
         */
-        $pdf::Output();
+        $pdf::Output("I","izveštaj.pdf",true);
         exit;
     }
     /**
