@@ -9,7 +9,7 @@
     <h3 class="widget-content themed-background-success text-light-op headline"><i class="fa fa-fw fa-chevron-right"></i> Ime trenutno ulogovanog korisnika: {{$name}}</h3>
     <h4 class="legenda widget-content themed-background-success text-light-op">Legenda</h4>
     <div class="item1">
-        <div class="form-check">
+        <div class="form-check" style="padding-left: 5px;">
                 
             <label class="switch switch-info">
                 <input id="stores" type="checkbox" class="form-check-input" onclick="myMap('stores')">
@@ -17,7 +17,7 @@
             </label> Radnje
         </div>
 
-        <div class="form-check">
+        <div class="form-check" style="padding-left: 5px;">
                 
             <label class="switch switch-success">
                     <input id="salons" type="checkbox" class="form-check-input" onclick="myMap('salons')">
@@ -25,12 +25,12 @@
             </label> Saloni
         </div>
 
-        <div class="form-check">
+        <div class="form-check" style="padding-left: 5px;">
                 
             <label class="switch switch-primary">
                     <input id="managers" type="checkbox" class="form-check-input" onclick="myMap('managers')">
                 <span></span>
-            </label> Managers
+            </label> Menadžeri
         </div>
     </div>
 

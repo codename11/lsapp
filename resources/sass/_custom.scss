@@ -1,3 +1,5 @@
+
+
 /* Form Select Switches */
 .switch {
     margin: 1px 0;
@@ -84,7 +86,7 @@
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     display: grid;
-    grid-template-columns: 10% 80% 10%;
+    grid-template-columns: 12% auto 12%;
     background-color: white;
     padding: 1px !important;
     grid-gap: 1px !important;
@@ -146,7 +148,8 @@
     width: 100%;
     height:auto;
     border-bottom: 1px solid whitesmoke;
-    padding-left: 5px;
+    padding-left: 2.5px;
+    padding-right: 2.5px;
 }
 
 label>img{
@@ -158,3 +161,10 @@ label>img{
     margin-bottom: -1px;
     border-top-right-radius: 5px;
 }
+
+@media only screen and (max-width: 768px) {
+    body {
+      font-size: 0.8em;
+      word-break: break-all;
+    }
+  }

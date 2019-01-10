@@ -30,7 +30,7 @@ img[src="https://cdn3.iconfinder.com/data/icons/discovery/32x32/actions/gtk-medi
 </style>
 </head>
 <body>
-    <div id="app">
+    <div id="app" style="width:100vw !important;">
         @include('inc.navbar')
 
         <main class="container py-4">
