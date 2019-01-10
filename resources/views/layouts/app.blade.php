@@ -155,6 +155,7 @@ nece se realizovati.-->
         };
         
     </script>
+    <script defer src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script defer src="{{ asset('js/skripta.js') }}"></script>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDllwuDAU1-GxoYtmVwp0rjxhPwYSfeI0Y&callback=myMap"></script>
 

@@ -42,6 +42,7 @@ function setMarkers(map,markerData, arr){
     }
     
     let icoUrl;
+    let markArr = [];
     if(flattened && flattened.length>0){
         
         var infowindow = new google.maps.InfoWindow();
@@ -83,6 +84,8 @@ function setMarkers(map,markerData, arr){
                 animation: google.maps.Animation.DROP,
             });
 
+            markArr.push(marker);
+
             let addresa = flattened[i].adresa ? "<p>Adresa: "+flattened[i].adresa+"</p>" : "<br>"; //Vrsi proveru da li postoji adresa, ako postoji, prikayuje je, ukoliko ne postoji, onda samo brejk lajn.
             let naziv = flattened[i].naziv ? "<h1>"+flattened[i].naziv+"</h1>" : "<br>";
             let ltdLng = flattened[i].lat && flattened[i].lng ? "<p>Koordinate: <br>Latitude: "+flattened[i].lat+"<br>Longitude: "+flattened[i].lng+"</p>" : "<br>";
@@ -95,6 +98,12 @@ function setMarkers(map,markerData, arr){
             })(marker, i));
             
         }
+
+        var markerCluster = new MarkerClusterer(map, markArr, {
+            imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+            }
+        );
+
     }
 
 }
