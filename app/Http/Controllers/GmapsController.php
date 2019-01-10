@@ -52,7 +52,7 @@ class GmapsController extends Controller
             $name = "Gost";
         }
         
-        return view("/test")->with("data", $data);
+        return view("/test")->with(compact("data", "name"));
     }
     
     /**
