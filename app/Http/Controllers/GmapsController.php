@@ -37,10 +37,13 @@ class GmapsController extends Controller
             ], 
             "managers":[
                 {
-                    "naziv": "Dragan Petrović","datum":"18/12/2018","vreme":"13:53","lat":"-33.9301981","lng":"151.0593021","description":"manager"
+                    "naziv": "Dragan Petrović","datum":"18/12/2018","vreme":"13:53","lat":"-33.7301981","lng":"151.1593021","description":"manager"
                 },
                 {
                     "naziv": "Petar Marković","datum":"13/12/2018","vreme":"09:28","lat":"-33.9301981","lng":"151.1593021","description":"manager"
+                },
+                {
+                    "naziv": "Mitar Mirić","datum":"13/12/2018","vreme":"09:28","lat":"-33.9301981","lng":"151.1593021","description":"manager"
                 }
             ]
         }';

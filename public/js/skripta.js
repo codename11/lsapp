@@ -50,11 +50,15 @@ function setMarkers(map,markerData, arr){
     
     let icoUrl;
     let markArr = [];
+    let lat1;
+    let lng1;
+    let add = 0;
+
     if(flattened && flattened.length>0){
         
         var infowindow = new google.maps.InfoWindow();
         for(let i=0;i<flattened.length;i++){
-
+            
             switch (flattened[i].description) {
                 case "buyer":/*Ovo je description atribut niza objekata iz baze.*/
                     icoUrl = icons.buyer.url;
@@ -82,8 +86,18 @@ function setMarkers(map,markerData, arr){
                     break;
             }
 
+            if(i-1>=0 && flattened[i-1].lat==flattened[i].lat && flattened[i-1].lng==flattened[i].lng){
+                add = 0.0000167107;
+                lat1 = parseFloat(flattened[i].lat)+add;
+                lng1 = parseFloat(flattened[i].lng)+add;
+            }
+            else{
+                lat1 = (parseFloat(flattened[i].lat));
+                lng1 = (parseFloat(flattened[i].lng));
+            }
+
             marker = new google.maps.Marker({
-                position: {lat: parseFloat(flattened[i].lat), lng: parseFloat(flattened[i].lng)},
+                position: {lat: lat1, lng: lng1},
                 map: map,
                 icon: icoUrl,
                 title: ""+flattened[i].naziv,
