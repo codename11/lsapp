@@ -87,7 +87,7 @@ function setMarkers(map,markerData, arr){
             }
 
             if(i-1>=0 && flattened[i-1].lat==flattened[i].lat && flattened[i-1].lng==flattened[i].lng){
-                add = 0.0000167107;
+                add = 0.0000167107;//Regulation for proximity between pins.
                 lat1 = parseFloat(flattened[i].lat)+add;
                 lng1 = parseFloat(flattened[i].lng)+add;
             }
