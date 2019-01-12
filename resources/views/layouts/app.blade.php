@@ -33,7 +33,7 @@ img[src="https://cdn3.iconfinder.com/data/icons/discovery/32x32/actions/gtk-medi
     <div id="app" style="width:100vw !important;">
         @include('inc.navbar')
 
-        <main class="container py-4">
+        <main class="container-fluid py-4">
             @include('inc.messages')
             @yield('content')
         </main>
@@ -63,7 +63,7 @@ nece se realizovati.-->
     <script>
         let data = JSON.parse({!!json_encode($data)!!});
         
-        console.log(data);
+        //console.log(data);
         //Kobajagi podaci dobijeni od servera.
         /*let data = {
             "stores":[

@@ -1,44 +1,51 @@
 let marker;
 let arr = [];
 
-function myMap(val) { 
+function myMap(me) { 
     let mapProp = new google.maps.Map(document.getElementById('googleMap'), {
         zoom: 10,
         center: {lat: -33.92, lng: 151.25}
     });
-    
-    if(val){
+   
+    let checkLen = document.querySelectorAll("input[type=checkbox]").length;
 
-        if(document.getElementById(val).checked==true){
-            arr.push(val);
-        }
-
-        if(document.getElementById(val).checked==false){
-            let index = arr.indexOf(val);
-            
-            if (index > -1) {
-                arr.splice(index, 1);
+    for(let i=0;i<checkLen;i++){
+        
+        if(document.querySelectorAll("input[type=checkbox]")[i].checked){
+        
+            let ifValExists = arr.indexOf(document.querySelectorAll("input[type=checkbox]")[i].value);
+            if(ifValExists==-1){
+                arr.push(document.querySelectorAll("input[type=checkbox]")[i].value);
             }
-        }
-        setMarkers(mapProp,data, arr);
-    }
-    else{
-        setMarkers(null);
-    }
             
+        }
+        
+    }
+
+    if(me && document.getElementById(me.value).checked==false){
+        let index = arr.indexOf(me.value);
+        if (index > -1) {
+            arr.splice(index, 1);
+        }
+    }
+    
+    setMarkers(mapProp,data, arr);
+    
 }
         
 function setMarkers(map,markerData, arr){
     
     let unFlattened;
     let flattened;
+    
     if(arr && arr.length>0){
 
-        unFlattened = arr.map((item, index) => markerData[item]);
+        unFlattened = arr.map((item, index) => markerData[item+"s"]);
+        
         flattened = unFlattened.reduce(function(a, b) {
             return a.concat(b);
         });
-        console.log(arr);
+        
     }
     
     let icoUrl;
