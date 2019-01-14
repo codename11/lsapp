@@ -86,10 +86,19 @@ function setMarkers(map,markerData, arr){
                     break;
             }
 
-            if(i-1>=0 && flattened[i-1].lat==flattened[i].lat && flattened[i-1].lng==flattened[i].lng){
-                add = 0.0000167107;//Regulation for proximity between pins.
+            add = 0.0000167107;//Regulation for proximity between pins. Modify cyfer for proximity clustering. 
+            /*Also determined minimum value between pin coordinates 
+            that doesn't cause clustering.*/
+
+            /*If condition is fulfilled, i.e. absolute value between 
+            the latituded and longitudes respectably is below minimum 
+            for clustering, determined value is added, slghtly offsetting coordinates.
+            By real world measurments, it's only couple of meters or less, even if that.*/
+            if(i-1>=0 && Math.abs(Math.abs(parseFloat(flattened[i-1].lat))-Math.abs(parseFloat(flattened[i].lat)))<add && Math.abs(Math.abs(parseFloat(flattened[i-1].lng))-Math.abs(parseFloat(flattened[i].lng)))<add){
+
                 lat1 = parseFloat(flattened[i].lat)+add;
                 lng1 = parseFloat(flattened[i].lng)+add;
+
             }
             else{
                 lat1 = (parseFloat(flattened[i].lat));
