@@ -85,8 +85,8 @@ function setMarkers(map,markerData, arr){
                     icoUrl = icons.default.url;
                     break;
             }
-
-            add = 0.0000167107;//Regulation for proximity between pins. Modify cyfer for proximity clustering. 
+                  
+            add = 0.00002;//Regulation for proximity between pins. Modify cyfer for proximity clustering. 
             /*Also determined minimum value between pin coordinates 
             that doesn't cause clustering.*/
 
