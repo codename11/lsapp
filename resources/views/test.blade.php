@@ -16,12 +16,20 @@
                    
                     $len = strlen(key($datax));
                     $description = substr(key($datax),0,$len-1);
+                    
+                    /*Dobijena vrednost iz baze koja ukoliko je true, 
+                    znači da je checkbox čekiran.*/
+                    $vredIzBazeChecked = false;
+                    /*Ovde se procenjuje da li je dobijena vrednost iz baze
+                    istinita, ukoliko jeste postavlja se checked atribut, 
+                    ukoliko nije, prazan string koji je u suštini ništa.*/
+                    $chc = $vredIzBazeChecked ? "checked" : "";
             ?>
     
                 <span class="" style="padding-left: 5px;">
     
                     <label class="switch switch-info">
-                        <input id="{{$description}}" type="checkbox" value="{{$description}}" class="form-check-input" onclick="myMap(this)">
+                        <input id="{{$description}}" type="checkbox" value="{{$description}}" class="form-check-input" onclick="myMap(this)" {{$chc}}>
                         <span></span>
                     </label> {{$description}}
     
