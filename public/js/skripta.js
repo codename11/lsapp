@@ -92,7 +92,7 @@ function setMarkers(map,markerData, arr){
 
             /*If condition is fulfilled, i.e. absolute value between 
             the latituded and longitudes respectably is below minimum 
-            for clustering, determined value is added, slghtly offsetting coordinates.
+            for clustering, determined value is added, slightly offsetting coordinates.
             By real world measurments, it's only couple of meters or less, even if that.*/
             if(i-1>=0 && Math.abs(Math.abs(parseFloat(flattened[i-1].lat))-Math.abs(parseFloat(flattened[i].lat)))<add && Math.abs(Math.abs(parseFloat(flattened[i-1].lng))-Math.abs(parseFloat(flattened[i].lng)))<add){
 
