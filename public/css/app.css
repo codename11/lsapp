@@ -169,6 +169,31 @@ a.text-light-op:focus {
   }
 }
 
+#inp {
+  font-family: Roboto;
+  width: 200px;
+}
+
+#suggestion li:hover {
+  cursor: pointer;
+  background-color: #f5f5f5;
+}
+
+#suggestion {
+  padding: 0px;
+  text-align: center;
+  position: absolute;
+  display: none;
+  border: 1px solid gray;
+  background-color: whitesmoke;
+  list-style-type: none;
+  z-index: 3;
+  width: 201px;
+  margin: 0px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -10812,6 +10837,31 @@ a.text-light-op:focus {
     font-size: 0.8em;
     word-break: break-all;
   }
+}
+
+#inp {
+  font-family: Roboto;
+  width: 200px;
+}
+
+#suggestion li:hover {
+  cursor: pointer;
+  background-color: #f5f5f5;
+}
+
+#suggestion {
+  padding: 0px;
+  text-align: center;
+  position: absolute;
+  display: none;
+  border: 1px solid gray;
+  background-color: whitesmoke;
+  list-style-type: none;
+  z-index: 3;
+  width: 201px;
+  margin: 0px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .img403 {

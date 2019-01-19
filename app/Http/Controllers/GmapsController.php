@@ -18,7 +18,7 @@ class GmapsController extends Controller
         {
             "stores":[
                 {
-                    "id":"1","naziv":"Tehnokom","adresa":"Knez Mihajlova 82","lat":"-33.890542","lng":"151.274856","id_komercijaliste":"Miloš Lovrić","description":"store"
+                    "id":"1","naziv":"Tehnokom","adresa":"Knez Mihajlova 82","lat":"44.665192","lng":"20.931357","id_komercijaliste":"Miloš Lovrić","description":"store"
                 },
                 {
                     "id":"2","naziv":"Termo Fluid","adresa":"Knez Mihajlova 86","lat":"-33.923036","lng":"151.259052","id_komercijaliste":"Dejan Ilić","description":"store"

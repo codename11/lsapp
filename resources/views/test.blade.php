@@ -6,6 +6,11 @@
 <h1>Google Map-Laravel</h1>
 
 <div class="">
+    
+    <div style="width: 200px;">
+        <input id="inp" class="controls" type="text" placeholder="Search Box">
+        <ul class="list-group" id="suggestion"></ul>
+    </div>
 
     <div class="item2" id="googleMap"></div>
 
@@ -54,5 +59,5 @@
     
     </div>
 </div>
-
+<div id="trt"></div>
 @endsection
