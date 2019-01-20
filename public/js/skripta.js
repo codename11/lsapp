@@ -250,4 +250,3 @@ function setMarkers(map,markerData, arr){
     }
 
 }
-

@@ -29,6 +29,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/test">test</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ajax">ajax</a>
+                    </li>
                     @auth
                     <li class="nav-item">
                         <a class="nav-link" href="/posts/create">Create Posts</a>

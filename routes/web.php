@@ -69,3 +69,10 @@ Route::get('/test', "GmapsController@test");
 
 //Ruta za pdf.
 Route::get('/pdfview/{post}', "FpdfController@pdf");
+
+//Rute za Ajax
+Route::get('/ajax', function(){ 
+    return view('ajax'); 
+});
+
+Route::post('/postajax','AjaxController@post');
