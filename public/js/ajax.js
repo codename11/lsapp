@@ -2,22 +2,23 @@
 
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 let chex = []; 
-document.getElementById("ajaxbtn").addEventListener("click", () => {
+if(document.getElementById("ajaxbtn")){
+    document.getElementById("ajaxbtn").addEventListener("click", () => {
 
-    $('input[type="checkbox"]:checked').each(function() {
-        chex.push($(this).val());
-    });
-    ajaks(chex); 
+        $('input[type="checkbox"]:checked').each(function() {
+            chex.push($(this).val());
+        });
+        ajaks(chex); 
 
-    for(let i=0;i<chex.length;i++){
-        if(document.getElementById(chex[i]).checked){
-            console.log("Cekirano je: "+document.getElementById(chex[i]).id);
-            
+        for(let i=0;i<chex.length;i++){
+            if(document.getElementById(chex[i]).checked){
+                console.log("Cekirano je: "+document.getElementById(chex[i]).id);
+                
+            }
         }
-    }
 
-});
-
+    });
+}
 function ajaks(par){
 
     $.ajax({

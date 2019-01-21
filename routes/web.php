@@ -65,8 +65,8 @@ Route::get('service/post/update', 'PostController@update');
 Route::get('service/post/delete', 'PostController@delete');
 
 //Test route for google map
-Route::get('/test', "GmapsController@test");
-
+//Route::get('/test', "GmapsController@test");
+Route::get('/test', "MapsController@index");
 //Ruta za pdf.
 Route::get('/pdfview/{post}', "FpdfController@pdf");
 
