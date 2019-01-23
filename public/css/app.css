@@ -172,6 +172,7 @@ a.text-light-op:focus {
 #inp {
   font-family: Roboto;
   width: 200px;
+  border-right: 0px;
 }
 
 #suggestion li:hover {
@@ -192,6 +193,28 @@ a.text-light-op:focus {
   margin: 0px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.outer {
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: auto auto;
+}
+
+.sl {
+  width: 200px;
+}
+
+#searchx {
+  text-decoration: none;
+  background-color: #fff;
+  line-height: 35px;
+  border: 1px solid #ced4da;
+  border-left: 0px;
+  padding-right: 5px;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  margin-left: -25px;
 }
 
 /*!
@@ -10842,6 +10865,7 @@ a.text-light-op:focus {
 #inp {
   font-family: Roboto;
   width: 200px;
+  border-right: 0px;
 }
 
 #suggestion li:hover {
@@ -10862,6 +10886,28 @@ a.text-light-op:focus {
   margin: 0px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.outer {
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: auto auto;
+}
+
+.sl {
+  width: 200px;
+}
+
+#searchx {
+  text-decoration: none;
+  background-color: #fff;
+  line-height: 35px;
+  border: 1px solid #ced4da;
+  border-left: 0px;
+  padding-right: 5px;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  margin-left: -25px;
 }
 
 .img403 {

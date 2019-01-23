@@ -2,7 +2,7 @@ let marker;
 let arr = [];//Čuva imena pritisnutih checkbox-ova.
 let input = document.getElementById('inp');//Polje za pretragu.
 let elem = document.getElementById("suggestion");//Ispadaju sugestije, klikom na neku od njih, centrira na traženu metu.
-console.log(data);
+//console.log(data);
 input.addEventListener("click", function(event){
 /* Osluškuje kada je kliknuto na polja za pretragu, 
 a sugestija nije prikazana, a postoje nađene sugestije koje su i upisane,
@@ -17,6 +17,15 @@ treba da prikaže sugestiju kada se kline na polje.*/
         blast();//Funkcija za generisanje sugestija.
     }
     
+});
+
+document.getElementById("searchx").addEventListener("click", ()=>{
+    event.stopPropagation();
+    
+    blast();
+    elem.style.display == "none";
+    elem.style.display == "inline-block";
+          
 });
 
 /*Osluškuje kada se kline bilo gde na strani*/
@@ -38,10 +47,18 @@ brišu se sve sugestije i sakrivaju se.*/
 
 /*Ukoliko se dogodi neki unos u polju za pretragu, 
 aktiviraj funkciju za generisanje sugestija.*/ 
-input.addEventListener("input", blast);
+$('document').ready(()=>{
+    input.addEventListener("keydown", (e)=>{
+        if(e.key=="Enter"){
+            blast();
+        }  
+    });
+    
+});
 
 //Funkcija za generisanje sugestija.
 function blast(){
+    
     //console.log(arr);
     let datax;//Ovde se skladišti kopija prosleđenog objekta od strane servera.
     
@@ -109,12 +126,26 @@ su čekirani checkbox-ovi.*/
                         unetim u polje za pretragu. Ukoliko ono iz polja ima sličnosti sa 
                         sa nečim iz nađenim, ta vrednost nađena se prikazuje u li elementu
                         (ranije rečeno sugestija) ispod polja za pretragu.*/
-                        if(datas.indexOf(input.value)>-1){
-                            index = k;
-                            /*Ukoliko dođe do gore navedenog poklapanja, sugestija se prikazuje, 
-                            li elementi se za nju generišu ispunjeni nađenim vrednostima.*/
-                            document.getElementById("suggestion").style.display = "inline-block";
-                            document.getElementById("suggestion").innerHTML += "<li class='list-group-item' style='border: 1px dotted gray;width: 100% !important;' onclick='myMap(false,{lat: "+filtered[keys1[i]][keys2Int[j]].lat+",lng: "+filtered[keys1[i]][keys2Int[j]].lng+"})'>"+datas+"</li>";
+                        if(datas.toLowerCase().indexOf(input.value.toLowerCase())>-1){
+                            //console.log(k+" : "+keys3);
+                            index1 = k;
+                            if(k==1){
+                                let naziv = filtered[keys1[i]][keys2Int[j]][keys3[1]];
+                                let adresa = filtered[keys1[i]][keys2Int[j]][keys3[2]];
+                                /*Ukoliko dođe do gore navedenog poklapanja, sugestija se prikazuje, 
+                                li elementi se za nju generišu ispunjeni nađenim vrednostima.*/
+                                document.getElementById("suggestion").style.display = "inline-block";
+                                document.getElementById("suggestion").innerHTML += "<li class='list-group-item' style='border: 1px dotted gray;width: 100% !important;' onclick='myMap(false,{lat: "+filtered[keys1[i]][keys2Int[j]].lat+",lng: "+filtered[keys1[i]][keys2Int[j]].lng+"})'>"+naziv+"<br><p>"+adresa+"</p></li>";
+                            }
+                            else if(k!=1){
+                                let naziv = filtered[keys1[i]][keys2Int[j]][keys3[1]];
+                                let adresa = filtered[keys1[i]][keys2Int[j]][keys3[2]];
+                                /*Ukoliko dođe do gore navedenog poklapanja, sugestija se prikazuje, 
+                                li elementi se za nju generišu ispunjeni nađenim vrednostima.*/
+                                document.getElementById("suggestion").style.display = "inline-block";
+                                document.getElementById("suggestion").innerHTML += "<li class='list-group-item' style='border: 1px dotted gray;width: 100% !important;' onclick='myMap(false,{lat: "+filtered[keys1[i]][keys2Int[j]].lat+",lng: "+filtered[keys1[i]][keys2Int[j]].lng+"})'>"+naziv+"<br><p>"+adresa+"</p></li>";
+                            }
+                            
                             
                         }
                         
@@ -133,9 +164,10 @@ su čekirani checkbox-ovi.*/
         }
     }
     }
-
+    
 function myMap(me, par) { 
     
+    let zoomedPin = "";
     let centar;
     let mapProp;
     /*Pri startovanju se proverava da ima nečega u polju za pretragu
@@ -143,18 +175,20 @@ function myMap(me, par) {
     ukoliko ima, zatvara se sugestija i setuje se centriranje na 
     koordinatu sugestije.*/
     if(par){
+        zoomedPin = par;
         centar = par;
 	    document.getElementById("inp").value = "";
 	    document.getElementById("suggestion").innerHTML = "";
         document.getElementById("suggestion").style.display = "none";
         
         mapProp = new google.maps.Map(document.getElementById('googleMap'), {
-            zoom: 18,
+            zoom: 22,
             center: centar
         });
 
         console.log("you are now at my coordinates.");
         par = "";
+        zoomedPin = "";
     }
     else{//Ovo je za default.
         centar = {lat: -27.92, lng: 140.25};
@@ -186,7 +220,7 @@ function myMap(me, par) {
     if(me && document.getElementById(me.value).checked==false){
         let index = arr.indexOf(me.value);
         /*Te ukoliko u nizu u kome se pamte čekirano, iz njega se ukljanjaju
-        nako ove provere.*/
+        nakon ove provere.*/
         if (index > -1) {
             arr.splice(index, 1);
         }
@@ -194,11 +228,19 @@ function myMap(me, par) {
     /*Prikazuje mi na strani u json obliku prosleđene podatke od servera.*/
     document.getElementById("blah").innerHTML=JSON.stringify(data);
     /*Setuje markere.*/
-    setMarkers(mapProp,data, arr);
+    setMarkers(mapProp,data, arr,zoomedPin);
     
 }
-        
-function setMarkers(map,markerData, arr){
+     
+/*function setter(par1,par2,par3,par4){
+
+    if(par4){
+        setMarkers(par1,par2, par3,par4);
+    }
+
+}*/
+
+function setMarkers(map,markerData, arr, pinZoomed){
     
     let unFlattened;
     let flattened;
@@ -338,7 +380,14 @@ vrši sa stores.*/
             let addresa = flattened[i].adresa ? "<p>Adresa: "+flattened[i].adresa+"</p>" : "<br>"; //Vrsi proveru da li postoji adresa, ako postoji, prikayuje je, ukoliko ne postoji, onda samo brejk lajn.
             let naziv = flattened[i].naziv ? "<h1>"+flattened[i].naziv+"</h1>" : "<br>";
             let ltdLng = flattened[i].lat && flattened[i].lng ? "<p>Koordinate: <br>Latitude: "+flattened[i].lat+"<br>Longitude: "+flattened[i].lng+"</p>" : "<br>";
-
+            //map,markerData, arr
+            //console.log(pinZoomed);
+            if(pinZoomed){
+                infowindow.setContent("<div>"+naziv+addresa+ltdLng+"</div>");
+                infowindow.open(map, marker);
+                pinZoomed = "";
+            }
+            //console.log(marker);
             /*definiše oblačić kada se klikne na određeni čunj.*/
             google.maps.event.addListener(marker, 'click', ((marker, i) => {
                 return () => {

@@ -7,14 +7,16 @@
 
 <div class="">
 
-    <div style="width: 200px;">
-        <input id="inp" class="controls" type="text" placeholder="Search Box">
+    <div class="form-group sl">
+
+        <div class="outer">
+            <input id="inp" class="form-control" type="text" placeholder="Search Box">
+            <a href="#" id="searchx" class="fa fa-search"></a>
+        </div>
         <ul class="list-group" id="suggestion"></ul>
+        
     </div>
     <div class="item2" id="googleMap"></div>
-
-
-    
 
     <div class="item1" id="chex">
                 
