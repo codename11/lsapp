@@ -47,5 +47,5 @@
     </div>
 
 <div id="blah"></div>
-
+<button onclick="testiranje()"> testiranje </button>
 @endsection

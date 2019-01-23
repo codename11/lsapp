@@ -2,6 +2,9 @@ let marker;
 let arr = [];//Čuva imena pritisnutih checkbox-ova.
 let input = document.getElementById('inp');//Polje za pretragu.
 let elem = document.getElementById("suggestion");//Ispadaju sugestije, klikom na neku od njih, centrira na traženu metu.
+let zoomedPin="";  
+let markArr = [];
+
 //console.log(data);
 input.addEventListener("click", function(event){
 /* Osluškuje kada je kliknuto na polja za pretragu, 
@@ -135,7 +138,7 @@ su čekirani checkbox-ovi.*/
                                 /*Ukoliko dođe do gore navedenog poklapanja, sugestija se prikazuje, 
                                 li elementi se za nju generišu ispunjeni nađenim vrednostima.*/
                                 document.getElementById("suggestion").style.display = "inline-block";
-                                document.getElementById("suggestion").innerHTML += "<li class='list-group-item' style='border: 1px dotted gray;width: 100% !important;' onclick='myMap(false,{lat: "+filtered[keys1[i]][keys2Int[j]].lat+",lng: "+filtered[keys1[i]][keys2Int[j]].lng+"})'>"+naziv+"<br><p>"+adresa+"</p></li>";
+                                document.getElementById("suggestion").innerHTML += "<li class='list-group-item' style='border: 1px dotted gray;width: 100% !important;' onclick='myMap(false,{lat: "+String(filtered[keys1[i]][keys2Int[j]].lat)+",lng: "+String(filtered[keys1[i]][keys2Int[j]].lng)+"})'>"+naziv+"<br><p>"+adresa+"</p></li>";
                             }
                             else if(k!=1){
                                 let naziv = filtered[keys1[i]][keys2Int[j]][keys3[1]];
@@ -143,7 +146,7 @@ su čekirani checkbox-ovi.*/
                                 /*Ukoliko dođe do gore navedenog poklapanja, sugestija se prikazuje, 
                                 li elementi se za nju generišu ispunjeni nađenim vrednostima.*/
                                 document.getElementById("suggestion").style.display = "inline-block";
-                                document.getElementById("suggestion").innerHTML += "<li class='list-group-item' style='border: 1px dotted gray;width: 100% !important;' onclick='myMap(false,{lat: "+filtered[keys1[i]][keys2Int[j]].lat+",lng: "+filtered[keys1[i]][keys2Int[j]].lng+"})'>"+naziv+"<br><p>"+adresa+"</p></li>";
+                                document.getElementById("suggestion").innerHTML += "<li class='list-group-item' style='border: 1px dotted gray;width: 100% !important;' onclick='myMap(false,{lat: "+String(filtered[keys1[i]][keys2Int[j]].lat)+",lng: "+String(filtered[keys1[i]][keys2Int[j]].lng)+"})'>"+naziv+"<br><p>"+adresa+"</p></li>";
                             }
                             
                             
@@ -164,10 +167,10 @@ su čekirani checkbox-ovi.*/
         }
     }
     }
-    
+
 function myMap(me, par) { 
     
-    let zoomedPin = "";
+    
     let centar;
     let mapProp;
     /*Pri startovanju se proverava da ima nečega u polju za pretragu
@@ -188,7 +191,7 @@ function myMap(me, par) {
 
         console.log("you are now at my coordinates.");
         par = "";
-        zoomedPin = "";
+        //zoomedPin = "";
     }
     else{//Ovo je za default.
         centar = {lat: -27.92, lng: 140.25};
@@ -228,7 +231,7 @@ function myMap(me, par) {
     /*Prikazuje mi na strani u json obliku prosleđene podatke od servera.*/
     document.getElementById("blah").innerHTML=JSON.stringify(data);
     /*Setuje markere.*/
-    setMarkers(mapProp,data, arr,zoomedPin);
+    setMarkers(mapProp,data, arr);
     
 }
      
@@ -240,7 +243,7 @@ function myMap(me, par) {
 
 }*/
 
-function setMarkers(map,markerData, arr, pinZoomed){
+function setMarkers(map,markerData, arr){
     
     let unFlattened;
     let flattened;
@@ -257,16 +260,37 @@ vrši sa stores.*/
         });
         
     }
+    console.log(flattened);
+    if(flattened.length>0){
+        for(let h=0;h<flattened.length;h++){
+
+            if(h>0){
     
+                if(Number(flattened[h-1].lat)==Number(flattened[h].lat) && Number(flattened[h-1].lng)==Number(flattened[h].lng)){
+                    console.log((h-1)+" dabome "+h);
+                    flattened[h].lat = String(Number(flattened[h].lat)+0.00002);
+                    flattened[h].lng = String(Number(flattened[h].lng)+0.00002);
+                    flattened[h-1].lat = String(Number(flattened[h-1].lat)-0.00002);
+                    flattened[h-1].lng = String(Number(flattened[h-1].lng)-0.00002);
+                }
+    
+            }
+    
+        }
+    }
+    console.log(flattened);
+
     let icoUrl;
-    let markArr = [];
+    
     let lat1;
     let lng1;
     let add = 0;
+    let infowindowContent = [];
 /*Izravnjani se sada upotrebljavaju.*/
     if(flattened && flattened.length>0){
-        
+        //console.log(flattened.length);
         var infowindow = new google.maps.InfoWindow();
+        
         for(let i=0;i<flattened.length;i++){
             //console.log(flattened[i].description);
             switch (flattened[i].description) {
@@ -375,23 +399,35 @@ vrši sa stores.*/
             });
 
             markArr.push(marker);
+            let ob1={lat: markArr[i].position.lat(),lng: markArr[i].position.lng()}
+            //console.log(ob1);
+
             /*Ukoliko postoje parametri daje im se vrednost, u suprotnom
             postavlja im se neka difoltna da ne bi bilo nedefinisano.*/
             let addresa = flattened[i].adresa ? "<p>Adresa: "+flattened[i].adresa+"</p>" : "<br>"; //Vrsi proveru da li postoji adresa, ako postoji, prikayuje je, ukoliko ne postoji, onda samo brejk lajn.
             let naziv = flattened[i].naziv ? "<h1>"+flattened[i].naziv+"</h1>" : "<br>";
             let ltdLng = flattened[i].lat && flattened[i].lng ? "<p>Koordinate: <br>Latitude: "+flattened[i].lat+"<br>Longitude: "+flattened[i].lng+"</p>" : "<br>";
+            infowindowContent.push("<div>"+naziv+addresa+ltdLng+"</div>");
             //map,markerData, arr
             //console.log(pinZoomed);
-            if(pinZoomed){
+            /*if(pinZoomed){
                 infowindow.setContent("<div>"+naziv+addresa+ltdLng+"</div>");
                 infowindow.open(map, marker);
                 pinZoomed = "";
-            }
+            }*/
             //console.log(marker);
             /*definiše oblačić kada se klikne na određeni čunj.*/
+            if(zoomedPin && zoomedPin.lat==markArr[i].position.lat()){
+                /*google.maps.event.trigger(marker, 'click', {
+                    latLng: new google.maps.LatLng(zoomedPin.lat,zoomedPin.lat)
+                });*/
+                //markArr[i].position.lat()=markArr[i].position.lat()+0.00002;
+                infowindow.setContent(infowindowContent[i]);
+                infowindow.open(map, markArr[i]);
+            }
             google.maps.event.addListener(marker, 'click', ((marker, i) => {
                 return () => {
-                    infowindow.setContent("<div>"+naziv+addresa+ltdLng+"</div>");
+                    infowindow.setContent(infowindowContent[i]);
                     infowindow.open(map, marker);
                 }
             })(marker, i));
@@ -406,4 +442,56 @@ vrši sa stores.*/
         imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
         }
     );
+
+    /*Setovanje otvorenog infowindow-a kada se koristeci pretragu,
+    centrira i zumira na cunj. Prolazi kroz sve markere koje se sada 
+    nalaze u globalnom nizu, te ukoliko se koordinate prosledjene klikom 
+    na sugestiju poklapaju sa nekom iz niza markera, za taj marker se 
+    otvara prozor.
+    */
+    /*for(let i=0;i<markArr.length;i++){
+        let test = {lat: markArr[i].position.lat(),lng: markArr[i].position.lng()}
+        console.log("****");
+        console.log(test.lat);
+        console.log(zoomedPin.lat);
+        console.log("****");
+        //console.log(test);
+        if(zoomedPin.lat==test.lat && zoomedPin.lng==test.lng){
+            console.log("yes!!!");
+            //console.log(test);
+            //console.log(zoomedPin);
+            //infowindow.setContent(infowindowContent[i]);
+            //infowindow.open(map, markArr[i]);
+            //console.log(markArr[i]);
+            console.log(add);
+            
+            
+        }
+        
+    }*/
+    
+    
+    /*for(let k=0;k<markArr.length;k++){
+        console.log(zoomedPin.lat);
+        console.log(markArr[k].position.lat());
+        if(zoomedPin.lat==markArr[k].position.lat()){
+            google.maps.event.trigger(markArr[k], 'click', {
+                latLng: new google.maps.LatLng(zoomedPin.lat,zoomedPin.lat)
+            });
+            
+        }
+    }*/
+
+    //console.log(map.getZoom());
+    //console.log("********");
+    for(let p=0;p<markArr.length;p++){
+        let ob2={lat: markArr[p].position.lat(),lng: markArr[p].position.lng()}
+        //console.log(ob2);
+    }
+    testiranje(markArr);
+    markArr = [];
+}
+
+function testiranje(par){
+    //console.log(par);
 }
